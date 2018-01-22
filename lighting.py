@@ -232,13 +232,10 @@ class LambertianPointLight(Ch):
 #     return sp.csc_matrix((data, ij), shape=(num_verts*3, 3))
 
 def LightDotNormal(num_verts):
-
-    normalize_rows = lambda v : v / col(ch.sqrt(ch.sum(v.reshape((-1,3))**2, axis=1)))
-    sum_rows = lambda v :  ch.sum(v.reshape((-1,3)), axis=1)
-
-    return Ch(lambda light_pos, v, vn :
-        sum_rows(normalize_rows(light_pos.reshape((1,3)) - v.reshape((-1,3))) * vn.reshape((-1,3))))
-
+    normalize_rows = lambda w : Ch(w) / Ch(col(ch.sqrt(ch.sum(w.reshape((-1,3))**2, axis=1))))
+    sum_rows = lambda w :  ch.sum(w.reshape((-1,3)), axis=1)
+    return Ch(lambda light_pos, w, vn :
+        sum_rows(normalize_rows(light_pos.reshape((1,3)) - w.reshape((-1,3))) * vn.reshape((-1,3))))
 
 
 def main():

@@ -24,7 +24,7 @@ except:
 import sys
 if 'setuptools.extension' in sys.modules:
     m = sys.modules['setuptools.extension']
-    m.Extension.__dict__ = m._Extension.__dict__
+    #m.Extension.__dict__ = m._Extension.__dict__
 
 context_dir = os.path.join(os.path.dirname(__file__), 'contexts')
 
@@ -37,7 +37,7 @@ def download_osmesa():
         osmesa_fname = 'OSMesa.%s.%s.zip' % (sysinfo[0], sysinfo[-2])
         zip_fname = os.path.join(context_dir, osmesa_fname)
         if not os.path.exists(zip_fname):
-            print "Downloading %s" % osmesa_fname
+            print ("Downloading %s" % osmesa_fname)
             # MPI url: http://files.is.tue.mpg.de/mloper/opendr/osmesa/%s
             # BL url: https://s3.amazonaws.com/bodylabs-assets/public/osmesa/%s
             wget('http://files.is.tue.mpg.de/mloper/opendr/osmesa/%s' % (osmesa_fname,), dest_fname=zip_fname)
@@ -52,7 +52,7 @@ def autogen_opengl_sources():
     import os
     sources = [ os.path.join(context_dir, x) for x in ['_constants.py', '_functions.pyx'] ]
     if not all([ os.path.exists(x) for x in sources ]):
-        print "Autogenerating opengl sources"
+        print ("Autogenerating opengl sources")
         from contexts import autogen
         autogen.main()
         for x in sources:
