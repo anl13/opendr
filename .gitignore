@@ -59,3 +59,4 @@ contexts/OSMesa.Darwin.x86_64.zip
 #contexts/ctx_mac.c
 #contexts/ctx_mesa.c
 venv
+!contexts/ctx_mesa.cpython-35m-x86_64-linux-gnu.so
